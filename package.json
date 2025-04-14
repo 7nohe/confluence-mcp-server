@@ -1,12 +1,12 @@
 {
-  "name": "@your-name/my-mcp-server",
+  "name": "@7nohe/confluence-mcp-server",
   "version": "0.0.1",
-  "description": "My MCP server",
+  "description": "Confluence MCP server",
   "keywords": [
     "mcp"
   ],
   "license": "MIT",
-  "author": "<your-name>",
+  "author": "Daiki Urata",
   "type": "module",
   "bin": "./dist/index.js",
   "files": [
@@ -16,7 +16,8 @@
   "scripts": {
     "build": "tsc && chmod 755 dist/*.js",
     "watch": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "generate:client": "npx openapi-typescript https://dac-static.atlassian.com/cloud/confluence/openapi-v2.v3.json -o ./src/client"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
@@ -24,5 +25,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "openapi-fetch": "^0.13.5",
+    "zod": "^3.24.2"
   }
 }
