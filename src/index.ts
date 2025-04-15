@@ -27,9 +27,12 @@ async function main() {
     "Confluenceのスペース内のページを取得します",
     {
       spaceId: z.string().describe("スペースID"),
+      title: z.string().describe("検索するページのタイトル").optional(),
     },
-    async ({ spaceId }) => {
-      const data = await confluenceClient.getPagesInSpace(spaceId);
+    async ({ spaceId, title }) => {
+      const data = await confluenceClient.getPagesInSpace(spaceId, {
+        title,
+      });
       return {
         content: [
           {

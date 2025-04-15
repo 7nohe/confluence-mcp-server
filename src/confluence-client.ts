@@ -51,13 +51,19 @@ export class ConfluenceClient {
     return response.data?.results || [];
   }
 
-  async getPagesInSpace(spaceId: string): Promise<paths["/spaces/{id}/pages"]["get"]["responses"][200]["content"]["application/json"]['results']> {
+  async getPagesInSpace(spaceId: string, query: {
+    title?: string,
+  }): Promise<paths["/spaces/{id}/pages"]["get"]["responses"][200]["content"]["application/json"]['results']> {
     const response = await this.client.GET('/spaces/{id}/pages', {
       params: {
         path: {
           id: Number(spaceId),
+        },
+        query: {
+          title: query.title,
+          limit: 10,
         }
-      }
+      },
     })
 
     if (response.error) {
